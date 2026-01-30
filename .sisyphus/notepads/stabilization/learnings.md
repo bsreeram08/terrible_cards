@@ -26,3 +26,12 @@ Verified the deal animation fix using Playwright automation and MutationObserver
 ### Evidence:
 - Verification script (`verify_deal.ts`) captured the state transitions of individual cards.
 - Screenshots confirmed the transition from empty hand to fully dealt fan layout.
+
+## Touch Target Optimization (Judging Phase)
+- **Problem**: Submission cards in the judging phase were 32x44 (8rem x 11rem) on mobile, which is decently large (128x176px) but the gap was loose (`gap-6`) and touch feedback was minimal.
+- **Solution**:
+  - Increased mobile card size to `!w-36 !h-52` (matching player hand cards).
+  - Reduced container gap to `gap-4` on mobile to fit 2 columns on small screens (iPhone SE).
+  - Added `p-2` padding to the clickable wrapper div to extend the hit area beyond the visual card boundary.
+  - Added `hover:bg-gray-100/50 active:bg-gray-200/50` and `rounded-xl` to the wrapper for immediate visual feedback on touch, even if the user misses the card slightly but hits the wrapper.
+- **Result**: "Fat finger" friendly interaction without compromising layout density.

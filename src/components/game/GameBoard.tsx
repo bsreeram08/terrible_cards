@@ -485,12 +485,12 @@ export default function GameBoard(props: GameBoardProps) {
                         </Show>
                       </div>
                       
-                      <div class="flex-1 w-full flex flex-wrap justify-center content-center gap-6 lg:gap-8 overflow-y-auto px-4 py-4 no-scrollbar">
+                      <div class="flex-1 w-full flex flex-wrap justify-center content-center gap-4 lg:gap-8 overflow-y-auto px-4 py-4 no-scrollbar">
                         <For each={submissions()}>
                           {(sub) => (
                             <div class="flex flex-col items-center gap-3 group transition-transform shrink-0">
                               <div 
-                                class={`transition-all duration-500 ${currentUserId() === round()?.judgeId && !isRevealed(sub.playerId) ? "cursor-pointer hover:scale-105 active:scale-95" : ""}`}
+                                class={`transition-all duration-500 p-2 rounded-xl ${currentUserId() === round()?.judgeId && !isRevealed(sub.playerId) ? "cursor-pointer hover:bg-gray-100/50 active:bg-gray-200/50 hover:scale-105 active:scale-95" : ""}`}
                                 onClick={() => {
                                   if (currentUserId() === round()?.judgeId && !isRevealed(sub.playerId)) {
                                     toggleReveal(sub.playerId);
@@ -499,12 +499,12 @@ export default function GameBoard(props: GameBoardProps) {
                               >
                                 <div class="flex gap-2 relative">
                                   <Show when={isRevealed(sub.playerId) || currentUserId() !== round()?.judgeId}>
-                                     <For each={sub.cards}>
+                                    <For each={sub.cards}>
                                       {(card) => (
                                         <Card 
                                           type="white" 
                                           card={card} 
-                                          class="!w-32 !h-44 lg:!w-36 lg:!h-48 text-xs shadow-xl"
+                                          class="!w-36 !h-52 lg:!w-36 lg:!h-48 text-xs shadow-xl"
                                           isFlipped={currentUserId() === round()?.judgeId ? !isRevealed(sub.playerId) : false}
                                           disableFlip={true}
                                         />
@@ -512,7 +512,7 @@ export default function GameBoard(props: GameBoardProps) {
                                     </For>
                                   </Show>
                                   <Show when={!isRevealed(sub.playerId) && currentUserId() === round()?.judgeId}>
-                                     <div class="w-32 h-44 lg:w-36 lg:h-48 bg-brand-secondary rounded-2xl flex items-center justify-center shadow-xl border-4 border-white transform transition-all duration-300 hover:rotate-3 group-hover:bg-brand-primary group-hover:scale-105">
+                                     <div class="w-36 h-52 lg:w-36 lg:h-48 bg-brand-secondary rounded-2xl flex items-center justify-center shadow-xl border-4 border-white transform transition-all duration-300 hover:rotate-3 group-hover:bg-brand-primary group-hover:scale-105">
                                         <span class="text-white font-black text-5xl italic">?</span>
                                      </div>
                                   </Show>
