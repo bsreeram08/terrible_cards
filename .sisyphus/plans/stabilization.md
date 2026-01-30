@@ -9,18 +9,18 @@
 ## Pending Tasks (Priority Order)
 
 ### 1. E2E Test Stabilization (CRITICAL)
-- [ ] **Fix '?' Mismatch**: The test expects 2 '?' (submissions) but finds 3 (one in prompt text). Fix selector to only target submission cards.
-- [ ] **State Sync Resilience**: Add better waiting logic for the "Pick Winner" button in `rigorous_multiplayer.spec.ts`.
+- [x] **Fix '?' Mismatch**: The test expects 2 '?' (submissions) but finds 3 (one in prompt text). Fix selector to only target submission cards.
+- [x] **State Sync Resilience**: Add better waiting logic for the "Pick Winner" button in `rigorous_multiplayer.spec.ts`.
 
 ### 2. UI/UX Reinvention
-- [ ] **Mobile Card Picking**: Redesign the card selection for small screens. Current snap-scroll is an improvement but still hard to see. Explore a vertical carousel or full-screen expansion.
-- [ ] **Deal Animation**: Staggered deal entrance is currently bugged/not triggering as expected. Fix logic in `GameBoard.tsx` effect.
-- [ ] **Mobile Judge View**: Ensure card reveal targets are large enough for fingers.
+- [x] **Mobile Card Picking**: Redesign the card selection for small screens. Current snap-scroll is an improvement but still hard to see. Explore a vertical carousel or full-screen expansion.
+- [x] **Deal Animation**: Staggered deal entrance is currently bugged/not triggering as expected. Fix logic in `GameBoard.tsx` effect.
+- [x] **Mobile Judge View**: Ensure card reveal targets are large enough for fingers.
 
 ### 3. Polish & Logic
-- [ ] **Confetti Trigger**: Refine logic so *only* the actual round winner sees the confetti.
-- [ ] **Tie Handling**: Implement visual feedback for ties (no points awarded).
-- [ ] **AFK Host**: Plan for host handover if the original host disconnects.
+- [x] **Confetti Trigger**: Refine logic so *only* the actual round winner sees the confetti.
+- [x] **Tie Handling**: Implement visual feedback for ties (no points awarded).
+- [x] **AFK Host**: Plan for host handover if the original host disconnects.
 
 ---
 
