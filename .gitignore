@@ -18,11 +18,15 @@
 /out/
 
 # production
+/dist
+/.output
+/.vinxi
 /build
 
 # misc
 .DS_Store
 *.pem
+.env.local.backup
 
 # debug
 npm-debug.log*
@@ -40,5 +44,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# vite/vinxi temp files
+app.config.timestamp_*.js
+
 .credentials/*
 .firebaserc
+
+*.log
+
+*.png
+test-results

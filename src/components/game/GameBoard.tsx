@@ -42,6 +42,11 @@ export default function GameBoard(props: GameBoardProps) {
   const requiredPick = () => round()?.blackCard?.pick || 1;
   const isCardSelected = (cardId: string) => selectedCards().some(c => c.id === cardId);
   
+  const isTie = createMemo(() => {
+    const wId = round()?.winnerId;
+    return !wId || wId === "undefined" || wId === "NONE";
+  });
+  
   const toggleReveal = (playerId: string) => {
     setRevealedSubmissions(prev => ({ ...prev, [playerId]: !prev[playerId] }));
   };
@@ -536,14 +541,24 @@ export default function GameBoard(props: GameBoardProps) {
                   <Show when={round()?.status === "complete"}>
                       <div class="flex flex-col items-center justify-center h-full gap-6 animate-in zoom-in fade-in duration-500 p-4 lg:p-6">
                         <div class="text-center space-y-1 shrink-0">
-                          <h2 class="text-3xl lg:text-4xl font-black uppercase text-brand-primary italic tracking-tighter animate-bounce">Winner Revealed!</h2>
+                          <Show when={isTie()} fallback={
+                            <h2 class="text-3xl lg:text-4xl font-black uppercase text-brand-primary italic tracking-tighter animate-bounce">Winner Revealed!</h2>
+                          }>
+                            <h2 class="text-3xl lg:text-4xl font-black uppercase text-orange-500 italic tracking-tighter animate-pulse">It's a Tie! 🤝</h2>
+                          </Show>
                           <Show when={nextRoundCountdown() !== null} fallback={
-                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em]">
-                              Winner: {(() => {
-                                const wId = round()?.winnerId;
-                                if (!wId || wId === "undefined" || wId === "NONE") return "TIE / NONE";
-                                return wId === currentUserId() ? "YOU!" : (playerNames()[wId] || `Player ${wId.slice(0, 8)}`);
-                              })()}
+                            <p 
+                              class="text-[10px] font-black uppercase tracking-[0.4em]"
+                              classList={{ "text-orange-500": isTie(), "text-gray-400": !isTie() }}
+                            >
+                              <Show when={isTie()} fallback={
+                                <>Winner: {(() => {
+                                  const wId = round()?.winnerId;
+                                  return wId === currentUserId() ? "YOU!" : (playerNames()[wId!] || `Player ${wId!.slice(0, 8)}`);
+                                })()}</>
+                              }>
+                                No points awarded this round
+                              </Show>
                             </p>
                           }>
                              <div class="text-3xl lg:text-4xl font-black text-brand-secondary bg-white px-6 py-2 rounded-2xl shadow-xl border-2 border-brand-secondary/20 relative group">

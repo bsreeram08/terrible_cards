@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #ff4757;
+  --color-brand-secondary: #2f3542;
+  --color-bg-dark: #1e272e;
+  --color-bg-light: #f1f2f6;
+  
+  --font-sans: system-ui, -apple-system, sans-serif;
+}
+
+body {
+  @apply bg-bg-light text-brand-secondary font-sans;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+.dark body {
+  @apply bg-bg-dark text-bg-light;
+}
