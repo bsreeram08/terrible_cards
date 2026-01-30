@@ -40,3 +40,11 @@ Verified the deal animation fix using Playwright automation and MutationObserver
 - **Pattern**: Move event-based animations (like confetti) to state-driven effects (`createEffect`) to ensure consistency and prevent redundant triggers.
 - **Decision**: Removed imperative confetti calls from `handleSubmitCards` and `handleWinnerSelect`.
 - **Reasoning**: To satisfy the requirement that *only* the round winner sees confetti, the trigger must be tied to the state (`round.winnerId`) and the current user's identity, rather than the action that causes the state change (which might be performed by a different user, e.g., the judge).
+
+### Tie Handling in GameBoard
+- Ties are identified when `round().winnerId` is falsy, `"undefined"`, or `"NONE"`.
+- Visual feedback for ties was enhanced by:
+  - Changing "Winner Revealed!" to "It's a Tie! 🤝".
+  - Using an orange color theme (`text-orange-500`, `bg-orange-500/10`) for tie scenarios to distinguish from normal wins.
+  - Adding a "No points awarded this round" message.
+  - Updating the winning cards background blur and card borders to match the tie theme.
