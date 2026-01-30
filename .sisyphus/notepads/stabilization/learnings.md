@@ -35,3 +35,8 @@ Verified the deal animation fix using Playwright automation and MutationObserver
   - Added `p-2` padding to the clickable wrapper div to extend the hit area beyond the visual card boundary.
   - Added `hover:bg-gray-100/50 active:bg-gray-200/50` and `rounded-xl` to the wrapper for immediate visual feedback on touch, even if the user misses the card slightly but hits the wrapper.
 - **Result**: "Fat finger" friendly interaction without compromising layout density.
+
+## Confetti Trigger Refinement (2026-01-30)
+- **Pattern**: Move event-based animations (like confetti) to state-driven effects (`createEffect`) to ensure consistency and prevent redundant triggers.
+- **Decision**: Removed imperative confetti calls from `handleSubmitCards` and `handleWinnerSelect`.
+- **Reasoning**: To satisfy the requirement that *only* the round winner sees confetti, the trigger must be tied to the state (`round.winnerId`) and the current user's identity, rather than the action that causes the state change (which might be performed by a different user, e.g., the judge).

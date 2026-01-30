@@ -236,7 +236,6 @@ export default function GameBoard(props: GameBoardProps) {
     try {
       await submitCardsAction(props.gameId, `round_${game()?.currentRound}`, currentUserId(), cards);
       setSelectedCards([]);
-      triggerConfetti();
     } catch (e) {
       console.error("Failed to submit cards:", e);
     } finally {
@@ -247,7 +246,6 @@ export default function GameBoard(props: GameBoardProps) {
   const handleWinnerSelect = async (playerId: string) => {
     if (currentUserId() !== round()?.judgeId || round()?.status !== "judging") return;
     await selectWinnerAction(props.gameId, `round_${game()?.currentRound}`, playerId);
-    triggerWinnerCelebration();
   };
 
   const handleNextRound = async () => {
