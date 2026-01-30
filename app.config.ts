@@ -6,11 +6,16 @@ export default defineConfig({
     plugins: [tailwindcss()],
     server: {
       watch: {
-        ignored: ["**/node_modules/**", "**/.git/**", "**/.vinxi/**", "**/.vercel/**"]
+        ignored: ["**/node_modules/**", "**/.git/**", "**/.vinxi/**", "**/.output/**"]
       }
     }
   },
   server: {
-    preset: "vercel"
+    preset: "firebase",
+    firebase: {
+      gen: 2,  // Use Cloud Functions Gen 2
+      nodeVersion: "20",
+      region: "us-central1"
+    }
   }
 });
