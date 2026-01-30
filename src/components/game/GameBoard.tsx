@@ -570,9 +570,19 @@ export default function GameBoard(props: GameBoardProps) {
                           </Show>
                         </div>
                         <div class="flex gap-4 lg:gap-6 relative shrink min-h-0">
-                          <div class="absolute -inset-20 bg-brand-primary/5 rounded-[100px] blur-[80px]" />
+                          <div 
+                            class="absolute -inset-20 rounded-[100px] blur-[80px]" 
+                            classList={{ "bg-orange-500/10": isTie(), "bg-brand-primary/5": !isTie() }}
+                          />
                           <For each={round()?.winningCards || []}>
-                            {(card) => <Card type="white" card={card} class="!w-36 !h-48 lg:!w-40 !h-56 relative shadow-2xl border-4 border-brand-primary/10" disableFlip={true} />}
+                            {(card) => (
+                              <Card 
+                                type="white" 
+                                card={card} 
+                                class={`!w-36 !h-48 lg:!w-40 !h-56 relative shadow-2xl border-4 ${isTie() ? 'border-orange-500/10' : 'border-brand-primary/10'}`} 
+                                disableFlip={true} 
+                              />
+                            )}
                           </For>
                         </div>
                         <Show when={(isHost() || currentUserId() === round()?.judgeId) && nextRoundCountdown() === null}>
