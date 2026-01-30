@@ -577,7 +577,7 @@ export default function GameBoard(props: GameBoardProps) {
                 </PlayArea>
               </div>
 
-              <section class="w-full shrink-0 h-40 lg:h-52 relative select-none mt-2">
+              <section class="w-full shrink-0 h-64 lg:h-52 relative select-none mt-2">
 
                 <Show when={currentUserId() !== round()?.judgeId && round()?.status === "submitting" && !round()?.submissions[currentUserId()]}>
                   <div class="absolute inset-0 pointer-events-none">
@@ -613,8 +613,8 @@ export default function GameBoard(props: GameBoardProps) {
                       
                       <div 
                         ref={setHandContainer}
-                        class="flex justify-start md:justify-center items-end h-28 lg:h-36 px-4 md:px-10 max-w-full overflow-x-auto no-scrollbar snap-x snap-mandatory"
-                        style={isMobile() ? { "padding-left": "calc(50% - 60px)", "padding-right": "calc(50% - 60px)" } : {}}
+                        class="flex justify-start md:justify-center items-end h-48 lg:h-36 px-4 md:px-10 max-w-full overflow-x-auto no-scrollbar snap-x snap-mandatory py-4"
+                        style={isMobile() ? { "padding-left": "calc(50% - 72px)", "padding-right": "calc(50% - 72px)" } : {}}
                       >
                         <For each={hand()?.cards || []}>
                           {(card, index) => {
@@ -634,20 +634,20 @@ export default function GameBoard(props: GameBoardProps) {
                                   "-ml-16 md:-ml-12 lg:-ml-16": !isMobile()
                                 }}
                                 style={{ 
-                                  transform: `rotate(${rotation()}deg) translateY(${translateY()}px) ${isSelected() ? 'translateY(-30px) rotate(0deg) scale(1.05)' : ''}`,
+                                  transform: `rotate(${rotation()}deg) translateY(${translateY()}px) ${isSelected() ? 'translateY(-40px) rotate(0deg) scale(1.1)' : ''}`,
                                   "z-index": isSelected() ? 200 : index() + 10 
                                 }}
                               >
                                 <Card 
                                   type="white" 
                                   card={card} 
-                                  class={`!w-28 !h-40 md:!w-24 md:!h-32 lg:!w-32 lg:!h-44 shadow-xl transition-all duration-300 ${isSelected() ? 'ring-2 ring-brand-primary ring-offset-2 bg-brand-primary/5' : 'group-hover:ring-1 group-hover:brand-primary/30'}`}
+                                  class={`!w-36 !h-52 md:!w-24 md:!h-32 lg:!w-32 lg:!h-44 shadow-xl transition-all duration-300 ${isSelected() ? 'ring-4 ring-brand-primary ring-offset-4 bg-brand-primary/10 shadow-[0_0_30px_rgba(0,0,0,0.3)]' : 'group-hover:ring-1 group-hover:brand-primary/30'}`}
                                   disableFlip={true}
                                   isSelected={isSelected()}
                                   onClick={() => handleCardSelect(card)}
                                 />
                                 <Show when={isSelected()}>
-                                   <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-primary text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-black shadow-md border border-white">
+                                   <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-brand-primary text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black shadow-md border-2 border-white animate-bounce">
                                       {selectedCards().findIndex(c => c.id === card.id) + 1}
                                    </div>
                                 </Show>

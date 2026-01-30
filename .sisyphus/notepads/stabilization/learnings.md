@@ -10,3 +10,19 @@
   - Updated `createEffect` to depend on `handContainer()`, ensuring it runs only when the container is mounted.
   - Removed `clearProps: "all"` from `dealCards` GSAP animation to preserve the fan layout `transform` applied by SolidJS.
 - **Learning**: When mixing GSAP `from` animations with SolidJS reactive styles, avoid `clearProps: "all"` if the element relies on inline styles for its final state. Also, use signal refs for conditionally rendered elements to ensure effects have access to the DOM node.
+
+## Deal Animation Verification (Task stab-3)
+
+Verified the deal animation fix using Playwright automation and MutationObserver.
+
+### Findings:
+- **Animation Trigger**: The animation correctly triggers at the start of each round when cards are dealt.
+- **Initial State**: Cards correctly start from off-screen (`translate(200px, -500px)`), rotated 45 degrees, and at 0 opacity.
+- **Stagger Effect**: Confirmed sequential card dealing with a ~100ms (0.1s) stagger between each card's animation start.
+- **Easing**: Smooth transition to the final fan layout using GSAP's `back.out` easing.
+- **Stability**: No GSAP-related errors were found in the game flow console logs. The "target not found" warning in the test route was identified as a test-specific ref issue and doesn't affect the core game.
+- **Layout**: Final card positions match the expected fan layout and are correctly contained within the play area.
+
+### Evidence:
+- Verification script (`verify_deal.ts`) captured the state transitions of individual cards.
+- Screenshots confirmed the transition from empty hand to fully dealt fan layout.
